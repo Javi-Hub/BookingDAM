@@ -1,2 +1,2 @@
-# Proyecto Booking
+# Proyecto Booking (Netbeans)
 ## Examen Android 2ºDAM

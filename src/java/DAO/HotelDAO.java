@@ -92,7 +92,7 @@ public class HotelDAO implements IDAO<Hotel, Integer>{
                    sql += "AND id_location='" + bean.getIdLocation()+ "'";
                 }
                 if (bean.getCity()!= null) {
-                   sql += "AND city='" + bean.getCity()+ "'";
+                   sql += "AND UPPER(city)='" + bean.getCity()+ "'";
                 }
                 if (bean.getBookedRooms()!= 0) {
                    sql += " AND COUNT(book_room.id)='" + bean.getBookedRooms()+ "'";

@@ -33,13 +33,14 @@ public class BookRoomAction implements interfaces.Action{
     private String insertSQL(HttpServletRequest request, HttpServletResponse response) {
         int id_user = Integer.parseInt(request.getParameter("USER"));
         int id_room = Integer.parseInt(request.getParameter("ROOM"));
-        
+        ArrayList<BookRoom> lstBookRooms;
         BookRoom bookRoom = new BookRoom();
         bookRoom.setIdUser(id_user);
         bookRoom.setIdRoom(id_room);
-        bookRoom.setCost(45.00);
         BookRoomDAO bookRoomDAO = new BookRoomDAO();
         bookRoomDAO.add(bookRoom);
-        return BookRoom.toObjectJson(bookRoom);
+        bookRoomDAO.findAll(bookRoom);
+        lstBookRooms = bookRoomDAO.findAll(bookRoom);
+        return BookRoom.toArrayJSon(lstBookRooms);    
     }
 }

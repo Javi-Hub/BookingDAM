@@ -8,9 +8,9 @@ public class Room {
     
     private int id, capacity, idHotel;
     private double cost;
-    private String available, hotelName, city;
+    private String available, hotelName, city, urlImage;
 
-    public Room(int id, int capacity, int idHotel, double cost, String available, String hotelName, String city) {
+    public Room(int id, int capacity, int idHotel, double cost, String available, String hotelName, String city, String urlImage) {
         this.id = id;
         this.capacity = capacity;
         this.idHotel = idHotel;
@@ -18,6 +18,7 @@ public class Room {
         this.available = available;
         this.hotelName = hotelName;
         this.city = city;
+        this.urlImage = urlImage;
     }
 
     public Room() {
@@ -78,6 +79,16 @@ public class Room {
     public void setCity(String city) {
         this.city = city;
     }
+
+    public String getUrlImage() {
+        return urlImage;
+    }
+
+    public void setUrlImage(String urlImage) {
+        this.urlImage = urlImage;
+    }
+    
+    
       
     public static String toArrayJSon(ArrayList<Room> rooms){
         GsonBuilder builder = new GsonBuilder();

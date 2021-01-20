@@ -12,7 +12,7 @@ public class BookRoomDAO implements IDAO<BookRoom, Integer>{
     
     private MotorSQL motorSQL;
     private final String SQL_FINDALL = 
-            "SELECT * FROM `book_room` WHERE 1=1";
+            "SELECT * FROM `book_room` WHERE 1=1 ";
     private final String SQL_INSERT =
             "INSERT INTO book_room (date_in, date_out, number_days, number_people, cost, id_user, id_room) VALUES ";
     
@@ -60,28 +60,28 @@ public class BookRoomDAO implements IDAO<BookRoom, Integer>{
             motorSQL.connect();
             if (bean != null) {
                 if (bean.getId()!= 0) {
-                   sql += "AND id='" + bean.getId() + "'";
+                   sql += " AND id='" + bean.getId() + "'";
                 }
                 if (bean.getDateIn()!= null) {
-                   sql += "AND date_in='" + bean.getDateIn()+ "'";
+                   sql += " AND date_in='" + bean.getDateIn()+ "'";
                 }
                 if (bean.getDateOut()!= null) {
-                   sql += "AND date_out='" + bean.getDateOut()+ "'";
+                   sql += " AND date_out='" + bean.getDateOut()+ "'";
                 }
                 if (bean.getNumberDays()!= 0) {
-                   sql += "AND number_days='" + bean.getNumberDays()+ "'";
+                   sql += " AND number_days='" + bean.getNumberDays()+ "'";
                 }
                 if (bean.getNumberPeople()!= 0) {
-                   sql += "AND number_people='" + bean.getNumberPeople()+ "'";
+                   sql += " AND number_people='" + bean.getNumberPeople()+ "'";
                 }
                 if (bean.getCost()!= 0) {
-                   sql += "AND cost='" + bean.getCost()+ "'";
+                   sql += " AND cost='" + bean.getCost()+ "'";
                 }
                 if (bean.getIdUser()!= 0) {
-                   sql += "AND id_user='" + bean.getIdUser()+ "'";
+                   sql += " AND id_user='" + bean.getIdUser()+ "'";
                 }
                 if (bean.getIdRoom()!= 0) {
-                   sql += "AND id_room='" + bean.getIdRoom()+ "'";
+                   sql += " AND id_room='" + bean.getIdRoom()+ "'";
                 }
              }
             

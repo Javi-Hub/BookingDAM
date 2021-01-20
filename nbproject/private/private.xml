@@ -4,17 +4,13 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Javier/Desktop/Proyectos_Netbeans/Booking/src/java/DAO/UserDAO.java</file>
+            <file>file:/C:/Users/Javier/Desktop/Proyectos_Netbeans/Booking/src/java/controller/Controller.java</file>
+            <file>file:/C:/Users/Javier/Desktop/Proyectos_Netbeans/Booking/src/java/model/Room.java</file>
             <file>file:/C:/Users/Javier/Desktop/Proyectos_Netbeans/Booking/src/java/action/UserAction.java</file>
             <file>file:/C:/Users/Javier/Desktop/Proyectos_Netbeans/Booking/src/java/action/HotelAction.java</file>
-            <file>file:/C:/Users/Javier/Desktop/Proyectos_Netbeans/Booking/src/java/model/Location.java</file>
-            <file>file:/C:/Users/Javier/Desktop/Proyectos_Netbeans/Booking/src/java/model/User.java</file>
-            <file>file:/C:/Users/Javier/Desktop/Proyectos_Netbeans/Booking/src/java/DAO/LocationDAO.java</file>
-            <file>file:/C:/Users/Javier/Desktop/Proyectos_Netbeans/Booking/src/java/DAO/BookRoomDAO.java</file>
-            <file>file:/C:/Users/Javier/Desktop/Proyectos_Netbeans/Booking/src/java/model/Hotel.java</file>
-            <file>file:/C:/Users/Javier/Desktop/Proyectos_Netbeans/Booking/src/java/controller/Controller.java</file>
-            <file>file:/C:/Users/Javier/Desktop/Proyectos_Netbeans/Booking/src/java/model/BookRoom.java</file>
-            <file>file:/C:/Users/Javier/Desktop/Proyectos_Netbeans/Booking/src/java/model/Room.java</file>
+            <file>file:/C:/Users/Javier/Desktop/Proyectos_Netbeans/Booking/src/java/action/BookRoomAction.java</file>
             <file>file:/C:/Users/Javier/Desktop/Proyectos_Netbeans/Booking/src/java/action/RoomAction.java</file>
+            <file>file:/C:/Users/Javier/Desktop/Proyectos_Netbeans/Booking/src/java/DAO/BookRoomDAO.java</file>
             <file>file:/C:/Users/Javier/Desktop/Proyectos_Netbeans/Booking/src/java/DAO/HotelDAO.java</file>
             <file>file:/C:/Users/Javier/Desktop/Proyectos_Netbeans/Booking/src/java/DAO/RoomDAO.java</file>
         </group>

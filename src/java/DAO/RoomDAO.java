@@ -54,6 +54,9 @@ public class RoomDAO implements IDAO<Room, Integer>{
                 if (bean.getAvailable()!= null) {
                    sql += "AND available='" + bean.getAvailable()+ "'";
                 }
+                if (bean.getUrlImage()!= null) {
+                   sql += "AND url_image='" + bean.getUrlImage()+ "'";
+                }
                 if (bean.getIdHotel()!= 0) {
                    sql += "AND id_hotel='" + bean.getIdHotel()+ "'";
                 }
@@ -68,7 +71,8 @@ public class RoomDAO implements IDAO<Room, Integer>{
                 room.setCapacity(resultset.getInt(2));
                 room.setCost(resultset.getDouble(3));
                 room.setAvailable(resultset.getString(4));
-                room.setIdHotel(resultset.getInt(5));
+                room.setUrlImage(resultset.getString(5));
+                room.setIdHotel(resultset.getInt(6));
                 
                 rooms.add(room);
             }
@@ -102,9 +106,10 @@ public class RoomDAO implements IDAO<Room, Integer>{
                 room.setCapacity(resultset.getInt(2));
                 room.setCost(resultset.getDouble(3));
                 room.setAvailable(resultset.getString(4));
-                room.setIdHotel(resultset.getInt(5));
-                room.setHotelName(resultset.getString(6));
-                room.setCity(resultset.getString(7));
+                room.setUrlImage(resultset.getString(5));
+                room.setIdHotel(resultset.getInt(6));
+                room.setHotelName(resultset.getString(7));
+                room.setCity(resultset.getString(8));
                
                 rooms.add(room);
             }
