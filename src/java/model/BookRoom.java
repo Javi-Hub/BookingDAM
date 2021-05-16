@@ -8,10 +8,10 @@ import java.util.Date;
 public class BookRoom {
     
     private int id, numberDays, numberPeople, idUser, idRoom;
-    private Date dateIn, dateOut;
+    private String dateIn, dateOut;
     private double cost;
 
-    public BookRoom(int id, int numberDays, int numberPeople, int idUser, int idRoom, Date dateIn, Date dateOut, double cost) {
+    public BookRoom(int id, int numberDays, int numberPeople, int idUser, int idRoom, String dateIn, String dateOut, double cost) {
         this.id = id;
         this.numberDays = numberDays;
         this.numberPeople = numberPeople;
@@ -54,16 +54,16 @@ public class BookRoom {
     public void setIdRoom(int idRoom) {
         this.idRoom = idRoom;
     }
-    public Date getDateIn() {
+    public String getDateIn() {
         return dateIn;
     }
-    public void setDateIn(Date dateIn) {
+    public void setDateIn(String dateIn) {
         this.dateIn = dateIn;
     }
-    public Date getDateOut() {
+    public String getDateOut() {
         return dateOut;
     }
-    public void setDateOut(Date dateOut) {
+    public void setDateOut(String dateOut) {
         this.dateOut = dateOut;
     }
     public double getCost() {

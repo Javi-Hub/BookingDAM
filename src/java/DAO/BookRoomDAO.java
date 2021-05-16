@@ -15,6 +15,8 @@ public class BookRoomDAO implements IDAO<BookRoom, Integer>{
             "SELECT * FROM `book_room` WHERE 1=1 ";
     private final String SQL_INSERT =
             "INSERT INTO book_room (date_in, date_out, number_days, number_people, cost, id_user, id_room) VALUES ";
+  
+   
     
     public BookRoomDAO(){
         motorSQL = ConnectionFactory.selectDb();
@@ -25,7 +27,7 @@ public class BookRoomDAO implements IDAO<BookRoom, Integer>{
         int resp = 0;
         try {
             motorSQL.connect();
-            String sql = SQL_INSERT + "(" + bean.getDateIn() + ", " + bean.getDateOut() + ", " + bean.getNumberDays()+ ", " + 
+            String sql = SQL_INSERT + "('" + bean.getDateIn() + "', '" + bean.getDateOut() + "', " + bean.getNumberDays()+ ", " + 
                     bean.getNumberPeople()+ ", " + bean.getCost() + ", " + bean.getIdUser()+ ", " + bean.getIdRoom()+ ")";
             
              //desactivo la restriccion de claves foráneas para insert
@@ -91,8 +93,8 @@ public class BookRoomDAO implements IDAO<BookRoom, Integer>{
             while (resultset.next()) {
                 BookRoom bookRoom = new BookRoom();
                 bookRoom.setId(resultset.getInt(1));
-                bookRoom.setDateIn(resultset.getDate(2));
-                bookRoom.setDateOut(resultset.getDate(3));
+                bookRoom.setDateIn(resultset.getString(2));
+                bookRoom.setDateOut(resultset.getString(3));
                 bookRoom.setNumberDays(resultset.getInt(4));
                 bookRoom.setNumberPeople(resultset.getInt(5));
                 bookRoom.setCost(resultset.getDouble(6));
@@ -112,6 +114,9 @@ public class BookRoomDAO implements IDAO<BookRoom, Integer>{
 
     @Override
     public int update(BookRoom bean) {
+        
+        
+        
         return 0;
     }
     

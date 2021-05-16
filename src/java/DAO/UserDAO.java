@@ -13,15 +13,40 @@ public class UserDAO implements IDAO<User, Integer>{
     private MotorSQL motorSQL;
     private final String SQL_FINDALL = 
             "SELECT * FROM `user` WHERE 1=1";
-  
-
+    private final String SQL_INSERT = 
+            "INSERT INTO user (name, surename, email, password) VALUES ";
+    private final String SQL_FIND_USER
+            = "SELECT * FROM `user` WHERE 1=1 ";
+    
     public UserDAO() {
         motorSQL = ConnectionFactory.selectDb();
     }
 
     @Override
     public int add(User bean) {
-        return 0;
+        int resp = 0;
+        try {
+            motorSQL.connect();
+            String sql = SQL_INSERT + "('" + bean.getName() + "', '" + bean.getSurename() +
+                    "', '" + bean.getEmail() + "', '" + bean.getPassword() + "')";
+            
+             //desactivo la restriccion de claves foráneas para insert
+            motorSQL.execute("SET FOREIGN_KEY_CHECKS=0;");
+            resp = motorSQL.execute(sql);
+            //vuelvo a activar la restricción de claves foráneas
+            motorSQL.execute("SET FOREIGN_KEY_CHECKS=1;");
+           
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            motorSQL.disconnect();
+        }
+        
+        if (resp > 0) {
+            System.out.println("Usuario registro con éxito");
+        }
+        
+        return resp;
     }
 
     @Override
@@ -44,7 +69,7 @@ public class UserDAO implements IDAO<User, Integer>{
                    sql += " AND name='" + bean.getName() + "'";
                 }
                 if (bean.getSurename()!= null) {
-                   sql += " AND surname='" + bean.getSurename()+ "'";
+                   sql += " AND surename='" + bean.getSurename()+ "'";
                 }
                 if (bean.getEmail()!= null) {
                    sql += " AND email='" + bean.getEmail()+ "'";
@@ -74,6 +99,50 @@ public class UserDAO implements IDAO<User, Integer>{
             motorSQL.disconnect();
         }
         return users;
+    }
+    
+    public User findOneUser(User bean) {
+        User user = new User();
+        String sql= SQL_FIND_USER;
+        try {
+            //1º) 
+            motorSQL.connect();
+            if (bean != null) {
+                if (bean.getId() != 0) {
+                    sql += " AND id='" + bean.getId()+ "'";
+                }
+                if (bean.getName() != null) {
+                    sql += " AND name='" + bean.getName() + "'";
+                }
+                if (bean.getSurename() != null) {
+                    sql += " AND surename='" + bean.getSurename() + "'";
+                }
+                if (bean.getEmail() != null) {
+                    sql += " AND email='" + bean.getEmail() + "'";
+                }
+                if (bean.getPassword() != null) {
+                    sql += " AND password='" + bean.getPassword() + "'";
+                }
+            }
+
+            System.out.println(sql);
+            ResultSet rs = motorSQL.
+                    executeQuery(sql);
+
+            while (rs.next()) {
+                
+                user.setId(rs.getInt(1));
+                user.setName(rs.getString(2));
+                user.setSurename(rs.getString(3));
+                user.setEmail(rs.getString(4));
+                user.setPassword(rs.getString(5));          
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            motorSQL.disconnect();
+        }
+        return user;
     }
 
     @Override

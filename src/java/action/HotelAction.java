@@ -19,7 +19,10 @@ public class HotelAction implements interfaces.Action{
                 break;
             case "FIND_FILTER":
                 stringDestiny = findFilter(request, response);
-                break;  
+                break; 
+            case "TOP_TEN":
+                stringDestiny = findTopTen(request, response);
+                break;
         }
         return stringDestiny;
     }
@@ -40,7 +43,14 @@ public class HotelAction implements interfaces.Action{
         return Hotel.toArrayJSon(lstHotels);
 
     }
+
+    private String findTopTen(HttpServletRequest request, HttpServletResponse response) {
+        HotelDAO hotelDAO = new HotelDAO();
+        ArrayList<Hotel> lstHotels = hotelDAO.findTopTen();
+        return Hotel.toArrayJSon(lstHotels);
+    }
     
+
     
     
 }

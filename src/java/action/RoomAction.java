@@ -21,6 +21,9 @@ public class RoomAction implements interfaces.Action{
             case "FIND_FILTER":
                 stringDestiny = findFilter(request, response);
                 break;
+            case "UPDATE":
+                stringDestiny = update(request, response);
+                break;
         }
         return stringDestiny; 
     }
@@ -40,4 +43,18 @@ public class RoomAction implements interfaces.Action{
         ArrayList<Room> lstRooms = roomDAO.findFilter(room);
         return Room.toArrayJSon(lstRooms);
     }
+
+    private String update(HttpServletRequest request, HttpServletResponse response) {
+        int idRoom = Integer.parseInt(request.getParameter("ID_ROOM"));
+        String available = "no";
+        Room room = new Room();
+        room.setId(idRoom);
+        room.setAvailable(available);
+        
+        RoomDAO roomDAO = new RoomDAO();
+        roomDAO.update(room);
+        return Room.toObjectJson(room);
+       
+    }
+    
 }

@@ -19,6 +19,9 @@ public class RoomDAO implements IDAO<Room, Integer>{
             "SELECT * FROM `room` WHERE 1=1";
     private final String SQL_FINDFILTER = "SELECT room.*, hotel.name, location.city FROM `room` INNER JOIN hotel ON room.id_hotel = hotel.id "
             + "INNER JOIN `location` ON location.id = hotel.id_location WHERE 1=1 ";
+    private final String SQL_UPDATE =
+            "UPDATE `room`  SET ";
+    
 
     public RoomDAO() {
         motorSQL = ConnectionFactory.selectDb();
@@ -97,6 +100,8 @@ public class RoomDAO implements IDAO<Room, Integer>{
                 }
              }
             
+            sql += " AND available = 'si'";
+            
             System.out.println(sql);
             ResultSet resultset = motorSQL.executeQuery(sql);
             
@@ -124,7 +129,49 @@ public class RoomDAO implements IDAO<Room, Integer>{
 
     @Override
     public int update(Room bean) {
-        return 0;
+        int resp = 0;
+        String sql;
+        try {
+            motorSQL.connect();
+
+            if (bean == null) {
+                System.out.println("Introduzca datos a modificar");
+            } else {
+
+                sql = SQL_UPDATE;
+                if (bean.getCapacity() != 0) {
+                    sql += "capacity='" + bean.getCapacity()+ "'";
+                }
+
+                if (bean.getCost() != 0) {
+                    sql += "cost='" + bean.getCost()+ "'";
+                }
+
+                if (bean.getAvailable() != null) {
+                    sql += "available='" + bean.getAvailable()+ "'";
+                }
+                
+                if (bean.getUrlImage() != null) {
+                    sql += "url_image='" + bean.getUrlImage()+ "'";
+                }
+
+                sql += " WHERE `id`=" + bean.getId()+ ";";
+                System.out.println(sql);
+                resp = motorSQL.execute(sql);
+            }
+
+        } catch (Exception e) {
+
+        } finally {
+            motorSQL.disconnect();
+        }
+
+        if (resp > 0) {
+            System.out.println("Habitacion actualizada con éxito.");
+        } else {
+            System.out.println("No se pudo actualizar.");
+        }
+        return resp;
     }
     
     

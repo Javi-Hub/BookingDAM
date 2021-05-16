@@ -23,6 +23,10 @@ public class HotelDAO implements IDAO<Hotel, Integer>{
     private final String SQL_FIND_FILTER = "SELECT hotel.*, location.city, COUNT(book_room.id) "
             + "FROM book_room INNER JOIN room ON room.id = book_room.id_room RIGHT JOIN "
             + "hotel ON room.id_hotel = hotel.id INNER JOIN location ON hotel.id_location = location.id WHERE 1=1 ";
+    private final String SQL_TOPTEN ="SELECT hotel.*, location.city, COUNT(book_room.id) "
+            + "FROM book_room INNER JOIN room ON room.id = book_room.id_room RIGHT JOIN "
+            + "hotel ON room.id_hotel = hotel.id INNER JOIN location ON hotel.id_location = location.id GROUP BY hotel.id"
+            + " ORDER BY COUNT(book_room.id) DESC LIMIT 10";
     
     public HotelDAO(){
         motorSQL = ConnectionFactory.selectDb();
@@ -130,6 +134,41 @@ public class HotelDAO implements IDAO<Hotel, Integer>{
     public ArrayList<Hotel> findAll() {
         ArrayList<Hotel> hotels = new ArrayList<>();
         String sql = SQL_FINDALL;
+        
+        try {
+            motorSQL.connect();
+            
+            System.out.println(sql);
+            ResultSet resultset = motorSQL.executeQuery(sql);
+            
+            while (resultset.next()) {
+                Hotel hotel = new Hotel();
+                
+                hotel.setId(resultset.getInt(1));
+                hotel.setName(resultset.getString(2));
+                hotel.setCategory(resultset.getInt(3));
+                hotel.setDescription(resultset.getString(4));
+                hotel.setRate(resultset.getDouble(5));
+                hotel.setAveragePrize(resultset.getDouble(6));
+                hotel.setUrlImage(resultset.getString(7));
+                hotel.setIdLocation(resultset.getInt(8));
+                hotel.setCity(resultset.getString(9));
+                hotel.setBookedRooms(resultset.getInt(10));
+                
+                hotels.add(hotel);
+            }
+           
+        } catch (SQLException sqle) {
+            System.out.println(sqle.getMessage());
+        } finally{
+            motorSQL.disconnect();
+        }
+        return hotels;
+    }
+    
+    public ArrayList<Hotel> findTopTen() {
+        ArrayList<Hotel> hotels = new ArrayList<>();
+        String sql = SQL_TOPTEN;
         
         try {
             motorSQL.connect();

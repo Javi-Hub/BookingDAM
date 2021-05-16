@@ -21,6 +21,8 @@ public class UserAction implements interfaces.Action{
             case "VALIDATE":
                 stringDestiny = findUser(request, response);
                 break;
+            case "INSERT":
+                stringDestiny = insertUser(request, response);
         }
         return stringDestiny;
     }
@@ -42,5 +44,29 @@ public class UserAction implements interfaces.Action{
         UserDAO userDAO = new UserDAO();
         ArrayList<User> lstUser = userDAO.findAll(user);
         return User.toArrayJSon(lstUser);
+       
     }
+  
+    
+    private String insertUser(HttpServletRequest request, HttpServletResponse response){
+          String name = request.getParameter("NAME");
+          String surename = request.getParameter("SURENAME");
+          String email = request.getParameter("EMAIL");
+          String password = request.getParameter("PASSWORD");
+          
+          User user = new User();
+          user.setName(name);
+          user.setSurename(surename);
+          user.setEmail(email);
+          user.setPassword(password);
+          
+          UserDAO userDAO = new UserDAO();
+          userDAO.add(user);
+          User myUser = userDAO.findOneUser(user);
+          return User.toObjectJson(myUser);
+             
+          
+          
+    }
+
 }
